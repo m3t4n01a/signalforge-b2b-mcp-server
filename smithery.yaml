@@ -1,0 +1,17 @@
+# Smithery.ai & Glama.ai MCP Server Configuration
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    required:
+      - apifyToken
+    properties:
+      apifyToken:
+        type: string
+        description: Your Apify API Token
+  commandFunction: |-
+    (config) => ({
+      command: 'npx',
+      args: ['-y', '@apify/actors-mcp-server', '--actors', 'willowy_catamaran_fco/b2b-domain-email-tech-scraper,willowy_catamaran_fco/google-linkedin-jobs-scraper,willowy_catamaran_fco/startup-ats-jobs-b2b-scraper,willowy_catamaran_fco/reddit-posts-b2b-scraper,willowy_catamaran_fco/youtube-transcript-extractor'],
+      env: { APIFY_TOKEN: config.apifyToken }
+    })
